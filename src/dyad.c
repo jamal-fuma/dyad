@@ -84,8 +84,11 @@
 static void panic(const char *fmt, ...);
 
 static void *dyad_realloc(void *ptr, int n) {
-  ptr = realloc(ptr, n);
+  void *tmp = ptr;
+  ptr = realloc(tmp, n);
   if (!ptr && n != 0) {
+    free(tmp);
+    tmp = 0;
     panic("out of memory");
   }
   return ptr;
