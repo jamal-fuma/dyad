@@ -87,7 +87,7 @@ static void *dyad_realloc(void *ptr, int n) {
   void *tmp = ptr;
   ptr = realloc(tmp, n);
   if (!ptr && n != 0) {
-    free(tmp);
+    dyad_free(tmp);
     tmp = 0;
     panic("out of memory");
   }
